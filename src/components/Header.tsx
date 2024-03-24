@@ -1,6 +1,11 @@
 import React from "react";
+import Search from "./Search";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  onSearch: (query: string) => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onSearch }) => {
   return (
     <header
       style={{
@@ -11,11 +16,7 @@ const Header: React.FC = () => {
       }}
     >
       <div>
-        <input
-          type="text"
-          placeholder="Ara..."
-          style={{ padding: "10px", marginRight: "10px" }}
-        />
+        <Search onSearch={onSearch} />
         <span>Favoriler</span>
       </div>
     </header>
