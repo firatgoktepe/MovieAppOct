@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Movie App</h1>
       <LoginForm />
     </div>
   );
