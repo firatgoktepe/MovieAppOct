@@ -24,7 +24,10 @@ const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState("");
   const [filterKey, setFilterKey] = useState("");
-  const [favorites, setFavorites] = useState<string[]>([]);
+  const [favorites, setFavorites] = useState<string[]>(() => {
+    const savedFavorites = localStorage.getItem("favorites");
+    return savedFavorites ? JSON.parse(savedFavorites) : [];
+  });
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -38,22 +41,15 @@ const HomePage: React.FC = () => {
       .then((data) => setMovies(data));
   }, []);
 
-  const toggleFavorite = (id: string) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(id)
-        ? prevFavorites.filter((favId) => favId !== id)
-        : [...prevFavorites, id]
-    );
-  };
-
   const sortedAndFilteredMovies = movies
     .filter((movie) =>
       movie.name.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .filter((movie) => {
       if (filterKey === "favorites") {
-        return true; // Şimdilik tüm filmleri döndür
+        return favorites.includes(movie.id);
       } else if (filterKey === "new") {
+        // Burada yeni eklenen filmleri filtreleme mantığınızı ekleyin
         return true; // Şimdilik tüm filmleri döndür
       }
       return true; // Filtreleme anahtarı boş ise tüm filmleri döndür
@@ -97,7 +93,16 @@ const HomePage: React.FC = () => {
               <Movie
                 movie={movie}
                 isFavorite={favorites.includes(movie.id)}
-                onToggleFavorite={toggleFavorite}
+                onToggleFavorite={(id) => {
+                  const newFavorites = favorites.includes(id)
+                    ? favorites.filter((favId) => favId !== id)
+                    : [...favorites, id];
+                  setFavorites(newFavorites);
+                  localStorage.setItem(
+                    "favorites",
+                    JSON.stringify(newFavorites)
+                  );
+                }}
               />
             </div>
           </Link>
