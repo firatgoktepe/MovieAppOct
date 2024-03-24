@@ -24,6 +24,7 @@ const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState("");
   const [filterKey, setFilterKey] = useState("");
+  const [favorites, setFavorites] = useState<string[]>([]);
 
   useEffect(() => {
     if (!isLoggedIn) {
@@ -36,6 +37,14 @@ const HomePage: React.FC = () => {
       .then((response) => response.json())
       .then((data) => setMovies(data));
   }, []);
+
+  const toggleFavorite = (id: string) => {
+    setFavorites((prevFavorites) =>
+      prevFavorites.includes(id)
+        ? prevFavorites.filter((favId) => favId !== id)
+        : [...prevFavorites, id]
+    );
+  };
 
   const sortedAndFilteredMovies = movies
     .filter((movie) =>
@@ -62,7 +71,10 @@ const HomePage: React.FC = () => {
 
   return (
     <div>
-      <Header onSearch={(query) => setSearchQuery(query)} />
+      <Header
+        onSearch={(query) => setSearchQuery(query)}
+        favoritesCount={favorites.length}
+      />
       <h2>Movies</h2>
       <div>
         <Sort onSort={(key) => setSortKey(key)} />
@@ -82,7 +94,11 @@ const HomePage: React.FC = () => {
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <div style={{ maxWidth: "250px" }}>
-              <Movie movie={movie} />
+              <Movie
+                movie={movie}
+                isFavorite={favorites.includes(movie.id)}
+                onToggleFavorite={toggleFavorite}
+              />
             </div>
           </Link>
         ))}

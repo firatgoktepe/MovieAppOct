@@ -3,9 +3,10 @@ import Search from "./Search";
 
 interface HeaderProps {
   onSearch: (query: string) => void;
+  favoritesCount: number;
 }
 
-const Header: React.FC<HeaderProps> = ({ onSearch }) => {
+const Header: React.FC<HeaderProps> = ({ onSearch, favoritesCount }) => {
   return (
     <header
       style={{
@@ -17,7 +18,7 @@ const Header: React.FC<HeaderProps> = ({ onSearch }) => {
     >
       <div>
         <Search onSearch={onSearch} />
-        <span>Favoriler</span>
+        <span>Favoriler {favoritesCount}</span>
       </div>
     </header>
   );
