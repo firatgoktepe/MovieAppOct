@@ -10,7 +10,8 @@ const Footer: React.FC = () => {
         bottom: 0,
         right: 0,
         width: "100%",
-        backgroundColor: "#f3f3f3",
+        height: "10rem",
+        backgroundColor: "#fff",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-between",
@@ -22,15 +23,15 @@ const Footer: React.FC = () => {
       }}
     >
       <div>
-        <FaFacebook style={{ marginRight: "1rem" }} />
-        <FaInstagram style={{ marginRight: "1rem" }} />
-        <FaTwitter style={{ marginRight: "1rem" }} />
-        <FaYoutube style={{ marginRight: "1rem" }} />
+        <FaFacebook style={{ marginRight: "1rem", fontSize: "15px" }} />
+        <FaInstagram style={{ marginRight: "1rem", fontSize: "15px" }} />
+        <FaTwitter style={{ marginRight: "1rem", fontSize: "15px" }} />
+        <FaYoutube style={{ marginRight: "1rem", fontSize: "15px" }} />
       </div>
       <div style={{ display: "flex" }}>
-        <p style={{ margin: "0 1rem" }}>Conditions of Use</p>
-        <p style={{ margin: "0 1rem" }}>Privacy & Policy</p>
-        <p style={{ margin: "0 1rem" }}>Press Room</p>
+        <p style={{ margin: "0 1rem", fontWeight: "600" }}>Conditions of Use</p>
+        <p style={{ margin: "0 1rem", fontWeight: "600" }}>Privacy & Policy</p>
+        <p style={{ margin: "0 1rem", fontWeight: "600" }}>Press Room</p>
       </div>
       <p>© 2023 Movies by Octet</p>
     </footer>

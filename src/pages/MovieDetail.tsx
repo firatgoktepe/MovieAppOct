@@ -49,19 +49,33 @@ const MovieDetail: React.FC = () => {
   return (
     <div>
       <div>
-        <h1>{movie.name}</h1>
-        <span>
-          Favoriler{" "}
-          {localStorage.getItem("favorites")
-            ? JSON.parse(localStorage.getItem("favorites") || "[]").length
-            : 0}
-        </span>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h2 style={{ textAlign: "center" }}>{movie.name}</h2>
+          <div>
+            <span
+              style={{ color: "#BE123C", fontSize: "18px", marginRight: "5px" }}
+            >
+              Favoriler{" "}
+            </span>
+            <span>
+              {localStorage.getItem("favorites")
+                ? JSON.parse(localStorage.getItem("favorites") || "[]").length
+                : 0}
+            </span>
+          </div>
+        </div>
         <svg
           onClick={toggleFavorite}
           style={{
             position: "absolute",
             top: "110px",
-            right: "20px",
+            right: "100px",
             cursor: "pointer",
           }}
           width="20"
@@ -79,12 +93,24 @@ const MovieDetail: React.FC = () => {
         </svg>
       </div>
       <img src={movie.image_url} alt={movie.name} style={{ width: "100%" }} />
-      <p>{movie.summary}</p>
+      <p style={{ fontSize: "18px", marginTop: "20px", marginBottom: "20px" }}>
+        {movie.summary}
+      </p>
       <hr />
-      <p>IMDb: {movie.imdb}</p>
-      <p>Category: {movie.category}</p>
-      <p>Country: {movie.country}</p>
-      <p>Year: {movie.year}</p>
+      <div style={{ marginTop: "5px", display: "flex", gap: "5px" }}>
+        <img
+          src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
+          alt="IMDb"
+          style={{ width: "30px", height: "auto", verticalAlign: "middle" }}
+        />
+        {movie.imdb} / 100
+      </div>
+      <p style={{ opacity: "0.4", fontSize: "14px", marginTop: "5px" }}>
+        {movie.category}
+      </p>
+      <p style={{ opacity: "0.4", fontSize: "14px", marginTop: "5px" }}>
+        {movie.country}, {movie.year}
+      </p>
     </div>
   );
 };

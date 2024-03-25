@@ -12,7 +12,7 @@ const LoginPage: React.FC = () => {
 
   return (
     <div>
-      <h1>Movie App</h1>
+      <h2 style={{ textAlign: "center" }}>Movies App</h2>
       <LoginForm />
     </div>
   );

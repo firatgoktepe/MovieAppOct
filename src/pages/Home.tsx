@@ -5,6 +5,7 @@ import Header from "../components/Header";
 import Movie from "../components/Movie";
 import Sort from "../components/Sort";
 import Filter from "../components/Filter";
+import useMobile from "../hooks/useMobile";
 
 type MovieType = {
   id: string;
@@ -29,6 +30,8 @@ const HomePage: React.FC = () => {
     return savedFavorites ? JSON.parse(savedFavorites) : [];
   });
 
+  const isMobile = useMobile();
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/login");
@@ -49,10 +52,9 @@ const HomePage: React.FC = () => {
       if (filterKey === "favorites") {
         return favorites.includes(movie.id);
       } else if (filterKey === "new") {
-        // Burada yeni eklenen filmleri filtreleme mantığınızı ekleyin
-        return true; // Şimdilik tüm filmleri döndür
+        return true;
       }
-      return true; // Filtreleme anahtarı boş ise tüm filmleri döndür
+      return true;
     })
     .sort((a, b) => {
       if (sortKey === "name") {
@@ -71,16 +73,18 @@ const HomePage: React.FC = () => {
         onSearch={(query) => setSearchQuery(query)}
         favoritesCount={favorites.length}
       />
-      <h2>Movies</h2>
-      <div>
-        <Sort onSort={(key) => setSortKey(key)} />
-        <Filter onFilter={(key) => setFilterKey(key)} />
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <h2>Movies</h2>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <Sort onSort={(key) => setSortKey(key)} />
+          <Filter onFilter={(key) => setFilterKey(key)} />
+        </div>
       </div>
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
+          gridTemplateColumns: isMobile ? "repeat(1, 1fr)" : "repeat(4, 1fr)",
+          gap: "50px",
         }}
       >
         {sortedAndFilteredMovies.map((movie) => (
@@ -89,7 +93,7 @@ const HomePage: React.FC = () => {
             key={movie.id}
             style={{ textDecoration: "none", color: "inherit" }}
           >
-            <div style={{ maxWidth: "250px" }}>
+            <div style={{}}>
               <Movie
                 movie={movie}
                 isFavorite={favorites.includes(movie.id)}

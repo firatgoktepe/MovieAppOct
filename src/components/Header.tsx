@@ -16,9 +16,22 @@ const Header: React.FC<HeaderProps> = ({ onSearch, favoritesCount }) => {
         marginBottom: "20px",
       }}
     >
-      <div>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         <Search onSearch={onSearch} />
-        <span>Favoriler {favoritesCount}</span>
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <span
+            style={{ color: "#BE123C", fontSize: "18px", marginRight: "5px" }}
+          >
+            Favoriler{" "}
+          </span>
+          <span style={{ fontSize: "15px" }}>{favoritesCount}</span>
+        </div>
       </div>
     </header>
   );

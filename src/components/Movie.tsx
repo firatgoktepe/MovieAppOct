@@ -76,13 +76,24 @@ const Movie: React.FC<MovieProps> = ({
             </span>
           )}
         </div>
-        <div>
-          <div style={{ fontWeight: "bold" }}>{movie.name}</div>
-          <div>
+        <div style={{ padding: "5px" }}>
+          <div style={{ opacity: "0.4", fontSize: "14px", marginTop: "5px" }}>
             {movie.country}, {movie.year}
           </div>
-          <div>IMDb: {movie.imdb}</div>
-          <div>{movie.category}</div>
+          <div style={{ fontWeight: "bold", marginTop: "5px" }}>
+            {movie.name}
+          </div>
+          <div style={{ marginTop: "5px", display: "flex", gap: "5px" }}>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/69/IMDB_Logo_2016.svg"
+              alt="IMDb"
+              style={{ width: "30px", height: "auto", verticalAlign: "middle" }}
+            />
+            {movie.imdb} / 100
+          </div>
+          <div style={{ opacity: "0.4", fontSize: "14px", marginTop: "5px" }}>
+            {movie.category}
+          </div>
         </div>
       </div>
     </Link>

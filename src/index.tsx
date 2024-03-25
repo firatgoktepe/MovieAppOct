@@ -12,7 +12,13 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <Router>
-        <div style={{ paddingBottom: "200px" }}>
+        <div
+          style={{
+            paddingBottom: "200px",
+            marginLeft: "5rem",
+            marginRight: "5rem",
+          }}
+        >
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route path="/" element={<HomePage />} />
